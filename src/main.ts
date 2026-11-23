@@ -152,8 +152,29 @@ async function switchChain() {
   }
 }
 
+const ACK_KEY = "ammora-burner-ack";
+function hasAck(): boolean { try { return localStorage.getItem(ACK_KEY) === "1"; } catch { return false; } }
+function askAck(): Promise<boolean> {
+  if (hasAck()) return Promise.resolve(true);
+  const m = $("warn"), chk = $<HTMLInputElement>("warnChk"), ok = $<HTMLButtonElement>("warnOk"), no = $<HTMLButtonElement>("warnNo");
+  chk.checked = false; ok.disabled = true; m.hidden = false; chk.focus();
+  return new Promise((res) => {
+    const done = (v: boolean) => {
+      m.hidden = true; document.removeEventListener("keydown", key);
+      if (v) { try { localStorage.setItem(ACK_KEY, "1"); } catch { /* ignore */ } }
+      res(v);
+    };
+    const key = (e: KeyboardEvent) => { if (e.key === "Escape") done(false); };
+    document.addEventListener("keydown", key);
+    chk.onchange = () => { ok.disabled = !chk.checked; };
+    ok.onclick = () => done(true);
+    no.onclick = () => done(false);
+  });
+}
+
 async function syncWallet(request = false) {
   if (!eth) { updateButton(); return; }
+  if (request && !(await askAck())) return;
   if (request) el.connect.classList.add("loading");
   try {
     const accs = await eth.request({ method: request ? "eth_requestAccounts" : "eth_accounts" }) as string[];

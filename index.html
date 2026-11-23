@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236d5efc'/%3E%3Cpath d='M8 22l8-14 8 14' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E" />
 </head>
 <body>
-<div class="banner">Testnet only. GIWA Sepolia test assets have no value. Do not use real funds.</div>
+<div class="banner" role="note"><span>⚠️ <b>Testnet demo</b> — use a fresh, empty burner wallet. Never connect a wallet holding real funds. Only GIWA Sepolia test ETH is needed.</span></div>
 <main>
   <header>
     <h1>Ammora Swap</h1>
@@ -32,8 +32,18 @@
     <button id="go" class="cta" disabled>Connect wallet</button>
     <div id="status" class="status" role="status"></div>
   </section>
-  <footer>Built with <a href="https://www.npmjs.com/package/@ammora-protocol/sdk" target="_blank" rel="noopener">Ammora SDK</a> &middot; GIWA Sepolia (91342) &middot; ETH is wrapped to WETH for the pool swap</footer>
+  <footer>Built with <a href="https://www.npmjs.com/package/@ammora-protocol/sdk" target="_blank" rel="noopener">Ammora SDK</a> &middot; GIWA Sepolia (91342) &middot; ETH is wrapped to WETH for the pool swap<br><span class="disc">Unaudited, experimental software provided as is, with no warranty. Use at your own risk.</span></footer>
 </main>
+<div id="warn" class="modal" role="dialog" aria-modal="true" aria-labelledby="warnT" hidden>
+  <div class="mbox">
+    <div class="mico" aria-hidden="true">⚠️</div>
+    <h2 id="warnT">Before you connect</h2>
+    <p>This is an experimental <b>testnet demo</b>. Please connect only a <b>fresh, empty burner wallet</b> created just for testing. Never use a wallet that holds real funds, and never share your seed phrase.</p>
+    <p>You only need free GIWA Sepolia test ETH, which has no real value.</p>
+    <label class="chk"><input type="checkbox" id="warnChk" /> <span>I'm using an empty test wallet</span></label>
+    <div class="mrow"><button id="warnNo" class="pill">Cancel</button><button id="warnOk" class="cta" disabled>Continue</button></div>
+  </div>
+</div>
 <script type="module" src="./src/main.ts"></script>
 </body>
 </html>
