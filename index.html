@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Ammora Swap · GIWA Sepolia</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236d5efc'/%3E%3Cpath d='M8 22l8-14 8 14' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E" />
+</head>
+<body>
+<div class="banner">Testnet only. GIWA Sepolia test assets have no value. Do not use real funds.</div>
+<main>
+  <header>
+    <h1>Ammora Swap</h1>
+    <button id="connect" class="pill">Connect wallet</button>
+  </header>
+  <section class="card">
+    <div class="row meta"><span id="net">Not connected</span><span id="acct"></span></div>
+    <div class="box">
+      <div class="row meta"><span>You pay</span><span id="balIn">Balance: -</span></div>
+      <div class="row"><input id="amt" inputmode="decimal" placeholder="0.0" autocomplete="off" /><span id="symIn" class="sym">ETH</span></div>
+      <button id="max" class="link">Max</button>
+    </div>
+    <button id="flip" class="flip" aria-label="Switch direction">&#8645;</button>
+    <div class="box">
+      <div class="row meta"><span>You receive (estimate)</span><span id="balOut">Balance: -</span></div>
+      <div class="row"><output id="out">0.0</output><span id="symOut" class="sym">tAMM</span></div>
+    </div>
+    <div class="row meta"><span>Slippage</span>
+      <select id="slip"><option value="50">0.5%</option><option value="100" selected>1%</option><option value="300">3%</option></select></div>
+    <div id="info" class="info"></div>
+    <button id="go" class="cta" disabled>Connect wallet</button>
+    <div id="status" class="status" role="status"></div>
+  </section>
+  <footer>Built with <a href="https://www.npmjs.com/package/@ammora-protocol/sdk" target="_blank" rel="noopener">Ammora SDK</a> &middot; GIWA Sepolia (91342) &middot; ETH is wrapped to WETH for the pool swap</footer>
+</main>
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>
